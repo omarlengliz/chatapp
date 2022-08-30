@@ -1,101 +1,119 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-
-* {
-  font-family: Montserrat;
-  box-sizing: border-box;
-  color: #333;
+.container {
+  display: flex;
+  /* position: relative; */
+  width: 96%;
+  padding: 14px 8px;
+  justify-content: center;
+  align-items: stretch;
+  align-content: center;
+  flex-direction: row;
 }
 
-body {
-  font-size: 16px;
+.input {
+  padding: 14px 32px 14px 16px;
+  border-radius: 4px 0 0 4px;
+  border: 2px solid #816ed6;
+  outline: none;
+  width: 80%;
+  background: transparent;
+  color: black;
 }
 
-.card {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  border-radius: 4px;
-  padding: 1rem;
-  position: relative;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  width: 25vw;
-  transform: translate(-50%, -50%);
+.input::placeholder {
+  color: black;
 }
 
-.cardHeader {
-  background: #6E85B7;
-  padding: 0.75rem 1.5rem;
-  border-radius: 2px;
-  text-transform: uppercase;
-  transform: skewY(-4deg);
-  font-size: 1.1rem;
-  font-weight: bold;
-  display: inline-block;
-  position: absolute;
-  top: -1rem;
-  left: -0.75rem;
-  color: white;
-}
-
-.cardBody {
-  margin-top: 2rem;
-}
-
-.inputGroup {
-  margin-bottom: 1rem;
-}
-
-label {
-  font-size: 0.9rem;
-  font-weight: bold;
-}
-
-input {
+.submit-button {
+  padding: 16px;
   border: none;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 0.5rem 0.1rem;
-  width: 100%;
-  border-radius: 2px;
-  border-bottom: 1px solid #eee;
-  transition: all 0.5s;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  outline: none;
+  background:#816ed6;
+  color: #fff;
+  text-transform: capitalize;
 }
 
-input:focus {
-  border-bottom: 1px solid #ccc;
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  width: 520px;
+  min-height: 600px;
+  text-align: center;
+  margin: 128px auto;
+  border-radius: 10px;
+  padding-bottom: 32px;
 }
 
-button {
-  background: #6E85B7;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 2px;
-  width: 100%;
-  text-transform: uppercase;
-  color: white;
-}
-
-.chatrooms {
-  margin-top: 1rem;
-}
-
-.chatroom {
+.chatroom-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin: 4px auto;
+  color: #fff;
+  background: #d4cd6e;
+
+  padding: 16px;
+  border-radius: 5px;
+  width: 90%;
+}
+.chatroom-row:nth-child(4n + 1) {
+  background: #6ed581
 }
 
-.join 
-{
-  background: #6E85B7;
+.chatroom-row:nth-child(4n + 2) {
+  background: #d5816e
+}
+
+.chatroom-row:nth-child(4n + 3) {
+  background:#ce6ed5
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.join-icon {
+  margin-right: 5px;
   color: white;
-  padding: 0.25rem 1rem;
-  border-radius: 2px;
 }
 
-a {
-  text-decoration: none;
-  color: white;
+.Auth-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
 }
 
+.Auth-form {
+  width: 420px;
+  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.Auth-form-content {
+  padding-left: 12%;
+  padding-right: 12%;
+}
+
+.Auth-form-title {
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 24px;
+  color: rgb(34, 34, 34);
+  font-weight: 800;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(34, 34, 34);
+}

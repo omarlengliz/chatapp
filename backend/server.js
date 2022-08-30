@@ -75,7 +75,8 @@ io.on("connection",(socket)=>
 
 
        {
-        const user=await User.findById(socket.userId    )
+        const user=await User.findById(socket.userId )
+        console.log(user)
         const  newMessage=new Message({
             chatroom:a.chatroomId,
             user:user.name,

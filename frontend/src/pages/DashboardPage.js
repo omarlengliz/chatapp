@@ -4,7 +4,7 @@ import { Oval } from "react-loader-spinner";
 import makeToast from "../Toaster";
 import { Link } from "react-router-dom";
 import { SocketContext } from "../context/socket";
-
+import {IoEnterOutline} from "react-icons/io5"
 const DashboardPage = () => {
   //functions
   const getRoom = () => {
@@ -46,6 +46,12 @@ const DashboardPage = () => {
         makeToast("error", err.response.data.message);
       });
   };
+  //colors array 
+  const colors=["#d4cd6e"
+    ,"#6ed581",
+    "#d5816e",
+    "#ce6ed5",
+    ]
   //ref
   const chatroomRef = React.createRef();
   //use State
@@ -64,24 +70,23 @@ const DashboardPage = () => {
   }, [socket]);
   if (loaded == true) {
     return (
-      <div className="card">
-        <div className="cardHeader">Chatroom</div>
-        <div className="cardBody">
-          <div className="inputGroup">
-            <label htmlFor="ChatroomName">Chatroom Name</label>
+        <div className="app">
+          <div className="container">
             <input
+              className="input"
               type="text"
               name="chatroomname"
               id="chatroomname"
               placeholder="room name"
               ref={chatroomRef}
             />
+                      <button className="submit-button" onClick={createRoom}>CREATE CHATROOM</button>
+
           </div>
 
-          <button onClick={createRoom}>CREATE CHATROOM</button>
           <div className="chatrooms">
             {chatrooms.map((chatroom, id) => (
-              <div key={id} className="chatroom">
+              <div key={id} className="chatroom-row">
                 <div>
                   <b>{chatroom.name}</b>
                 </div>
@@ -89,13 +94,16 @@ const DashboardPage = () => {
                   to={"/chatroom/" + chatroom._id}
                   state={{ name: chatroom.name }}
                 >
-                  <div className="join">Join</div>
-                </Link>
+                <div className='icons'>
+                      <IoEnterOutline
+                        className='join-icon'
+                      />
+                     
+                    </div>                </Link>
               </div>
             ))}
           </div>
         </div>
-      </div>
     );
   } else {
     return (

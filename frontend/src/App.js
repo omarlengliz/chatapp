@@ -3,11 +3,9 @@ import LoginPage from './pages/LoginPage.js';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import ChatroomPage from "./pages/ChatroomPage";
-import { useEffect, useState } from "react";
 import IndexPage from "./pages/IndexPage";
-import io from "socket.io-client"
-import makeToast from "./Toaster.js";
 import {SocketContext, socket} from './context/socket';
+import styles from '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 
 function App() {
  

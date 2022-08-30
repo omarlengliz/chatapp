@@ -3,7 +3,10 @@ import { useParams, useLocation } from "react-router-dom";
 import { Oval } from "react-loader-spinner";
 import { SocketContext } from "../context/socket";
 import makeToast from "../Toaster";
+import {ConversationHeader,Message,MessageList} from "@chatscope/chat-ui-kit-react"
+import { useNavigate } from "react-router-dom";
 
+import { IoSend } from "react-icons/io5";
 const ChatroomPage = () => {
   //function
   const scrollBottom = () => {
@@ -22,9 +25,16 @@ const ChatroomPage = () => {
       makeToast("error", "message is empty!!!");
     }
   };
+  const dashboard = ()=>
+  {
+    navigate("/dashboard")
+  }
   //useRef
   const bottomRef = useRef(null);
   const messageRef = useRef(null);
+  //useNavigate
+  const navigate = useNavigate();
+
   //useState
   const [messages, setMessages] = useState(null);
   //useContext
@@ -51,6 +61,7 @@ const ChatroomPage = () => {
       scrollBottom();
     });
   }, []);
+
   if (messages === null) {
     return (
       <div
@@ -77,49 +88,59 @@ const ChatroomPage = () => {
     );
   } else {
     return (
-      <div className="chatroomPage">
+      <div style={{margin: "20px 2px"}}>
         <div className="chatroomSection">
-          <div className="cardHeader">{chatroomName}</div>
-          <div className="chatroomContent">
-            {messages === null
-              ? console.log("hhe")
-              : messages.map((message, i) => (
-                  <div key={i} className="message">
-                    <span
-                      className={
-                        localStorage.getItem("name") === message.user
-                          ? "ownMessage"
-                          : "otherMessage"
-                      }
-                    >
-                      {localStorage.getItem("name") === message.user
-                        ? "You"
-                        : message.user}
-                      :
-                    </span>{" "}
-                    {message.message}
-                  </div>
-                ))}
-            <br></br>
-            <div id="bottom" ref={bottomRef}></div>
-          </div>
+            <ConversationHeader >
+              <ConversationHeader.Back onClick={dashboard} />
+              <ConversationHeader.Content userName={chatroomName} />
+            </ConversationHeader>
+          <MessageList className="messageList">
+              {messages === null
+                ? console.log("hhe")
+                : messages.map((message, i) => (
+                    <span key={i}>
+                        <Message
+
+                            model={{
+                              type: "custom",
+
+                            message: message.message,
+                            sentTime: "just now",
+                            sender: "Joe",
+                            direction:
+                              localStorage.getItem("name") !== message.user
+                                ? 0
+                                : 1,
+                          }}
+                        >
+                        </Message>
+                        {localStorage.getItem("name") !== message.user ? (
+                          <Message.Footer sender={message.user} />
+                        ) : (
+                          <Message.Footer sentTime="You" />
+                        )}
+                    </span>
+                  ))}
+                  <br></br><br></br>
+          </MessageList>
+
           <div className="chatroomActions">
-            <div>
-              <input
-                ref={messageRef}
-                type={"text"}
-                name="message"
-                placeholder="type a message !"
-              ></input>
-            </div>
-            <div>
-              <button onClick={sendMessage} className="join">
-                Send
-              </button>
-            </div>
+            <input
+              ref={messageRef}
+              type={"text"}
+              name="message"
+              className="input-message"
+              placeholder="type a message !"
+            ></input>
+            <button onClick={sendMessage} className="send-button">
+                      <IoSend
+                        className='join-icon'
+                      />
+                     
+            </button></div>
           </div>
         </div>
-      </div>
+      
     );
   }
 };

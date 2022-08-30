@@ -2,22 +2,32 @@ const mongoose=require("mongoose")
 const User=mongoose.model("User")
 const sha256=require("js-sha256")
 const jwt=require("jsonwebtoken")
-exports.register = async(req,res)=>
+exports.register = async (req,res)=>
 {
     const {name, email , password} = req.body ; 
-    const emailRegex= /[@gmail.com|@yahoo.com|@hotmail.com]$/;
-    if(!emailRegex.test(email)) throw "Email is not supported from your domain"
-    if(password<6) throw "Password must be at least 6 charcters"
-    const userExist= await User.findOne({
-        email,
-    })
-    if(userExist) throw "This email is already registred"
-    const user = new User({name,email,password : sha256(password+process.env.SALT)})
+    const emailRegex = /@gmail.com|@yahoo.com|@hotmail.com|@live.com/;
+
+    if (!emailRegex.test(email)) throw "Email is not supported from your domain.";
+    if (password.length < 6) throw "Password must be atleast 6 characters long.";
+  
+    const userExists = await User.findOne({
+      email,
+    });
+  
+    if (userExists) throw "User with same email already exits.";
+  
+    const user = new User({
+      name,
+      email,
+      password: sha256(password + process.env.SALT),
+    });
+  
     await user.save();
+  
     res.json({
-        message:"User registred successfully"
-    })
-}   
+      message: "User [" + name + "] registered successfully!",
+    });
+  };
 exports.login = async(req,res)=>
 {
     const { email , password} = req.body;
