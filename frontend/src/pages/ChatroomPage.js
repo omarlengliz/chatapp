@@ -3,7 +3,11 @@ import { useParams, useLocation } from "react-router-dom";
 import { Oval } from "react-loader-spinner";
 import { SocketContext } from "../context/socket";
 import makeToast from "../Toaster";
-import {ConversationHeader,Message,MessageList} from "@chatscope/chat-ui-kit-react"
+import {
+  ConversationHeader,
+  Message,
+  MessageList,
+} from "@chatscope/chat-ui-kit-react";
 import { useNavigate } from "react-router-dom";
 
 import { IoSend } from "react-icons/io5";
@@ -13,7 +17,7 @@ const ChatroomPage = () => {
     bottomRef.current?.scrollIntoView();
   };
   const sendMessage = () => {
-    if (socket && messageRef.current.value != "") {
+    if (socket && messageRef.current.value !=="") {
       socket.emit("chatroomMessage", {
         chatroomId: chatroomId,
         message: messageRef.current.value,
@@ -25,10 +29,9 @@ const ChatroomPage = () => {
       makeToast("error", "message is empty!!!");
     }
   };
-  const dashboard = ()=>
-  {
-    navigate("/dashboard")
-  }
+  const dashboard = () => {
+    navigate("/dashboard");
+  };
   //useRef
   const bottomRef = useRef(null);
   const messageRef = useRef(null);
@@ -88,40 +91,37 @@ const ChatroomPage = () => {
     );
   } else {
     return (
-      <div style={{margin: "20px 2px"}}>
+      <div style={{ margin: "20px 2px" }}>
         <div className="chatroomSection">
-            <ConversationHeader >
-              <ConversationHeader.Back onClick={dashboard} />
-              <ConversationHeader.Content userName={chatroomName} />
-            </ConversationHeader>
+          <ConversationHeader>
+            <ConversationHeader.Back onClick={dashboard} />
+            <ConversationHeader.Content userName={chatroomName} />
+          </ConversationHeader>
           <MessageList className="messageList">
-              {messages === null
-                ? console.log("hhe")
-                : messages.map((message, i) => (
-                    <span key={i}>
-                        <Message
+            {messages === null
+              ? console.log("hhe")
+              : messages.map((message, i) => (
+                  <span key={i}>
+                    <Message
+                      model={{
+                        type: "custom",
 
-                            model={{
-                              type: "custom",
-
-                            message: message.message,
-                            sentTime: "just now",
-                            sender: "Joe",
-                            direction:
-                              localStorage.getItem("name") !== message.user
-                                ? 0
-                                : 1,
-                          }}
-                        >
-                        </Message>
-                        {localStorage.getItem("name") !== message.user ? (
-                          <Message.Footer sender={message.user} />
-                        ) : (
-                          <Message.Footer sentTime="You" />
-                        )}
-                    </span>
-                  ))}
-                  <br></br><br></br>
+                        message: message.message,
+                        sentTime: "just now",
+                        sender: "Joe",
+                        direction:
+                          localStorage.getItem("name") !== message.user ? 0 : 1,
+                      }}
+                    ></Message>
+                    {localStorage.getItem("name") !== message.user ? (
+                      <Message.Footer sender={message.user} />
+                    ) : (
+                      <Message.Footer sentTime="You" />
+                    )}
+                  </span>
+                ))}
+            <br></br>
+            <br></br>
           </MessageList>
 
           <div className="chatroomActions">
@@ -133,14 +133,11 @@ const ChatroomPage = () => {
               placeholder="type a message !"
             ></input>
             <button onClick={sendMessage} className="send-button">
-                      <IoSend
-                        className='join-icon'
-                      />
-                     
-            </button></div>
+              <IoSend className="join-icon" />
+            </button>
           </div>
         </div>
-      
+      </div>
     );
   }
 };

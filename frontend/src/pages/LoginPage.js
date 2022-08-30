@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import makeToast from "../Toaster";
-import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const LoginPage = () => {
   const emailRef = React.createRef();
@@ -11,9 +11,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const loginUser = async () => {
-    const localStorageName=localStorage.getItem("name")
-    const localStorageToken=localStorage.getItem("token")
-    
+   
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     axios
@@ -22,9 +20,8 @@ const LoginPage = () => {
         password,
       })
       .then(async (res) => {
-        
-        localStorage.clear()
-         makeToast("success", res.data.message);
+        localStorage.clear();
+        makeToast("success", res.data.message);
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("name", res.data.userName);
         navigate("/dashboard");
@@ -57,11 +54,15 @@ const LoginPage = () => {
             />
           </div>
           <div className="d-grid gap-2 mt-3">
-            <button type="button" onClick={loginUser} className="btn btn-primary">
+            <button
+              type="button"
+              onClick={loginUser}
+              className="btn btn-primary"
+            >
               Login
             </button>
           </div>
-         <br></br>
+          <br></br>
         </div>
       </form>
     </div>

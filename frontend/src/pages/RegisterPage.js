@@ -1,10 +1,9 @@
-import React  from "react";
+import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import makeToast from "../Toaster";
 import { Link } from "react-router-dom";
-import { useRef } from "react";
-import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const RegisterPage = () => {
   const emailRef = React.createRef();
@@ -39,7 +38,7 @@ const RegisterPage = () => {
           <h3 className="Auth-form-title">Sign Up</h3>
           <div className="text-center">
             Already registered?{" "}
-            <span className="link-primary" >
+            <span className="link-primary">
               <Link to="/login">Login</Link>
             </span>
           </div>
@@ -71,11 +70,15 @@ const RegisterPage = () => {
             />
           </div>
           <div className="d-grid gap-2 mt-3">
-            <button type="button" onClick={registerUser} className="btn btn-primary">
+            <button
+              type="button"
+              onClick={registerUser}
+              className="btn btn-primary"
+            >
               Register
             </button>
           </div>
-       <br></br>
+          <br></br>
         </div>
       </form>
     </div>
